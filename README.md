@@ -1,4 +1,4 @@
 Game made for "Dżemik" competition, 2024 edition.
-You can play live version here: [Live Version](https://przyklad.pl){:target="_blank"}, or download release from this repo ;D.
+You can play live version here: <a href="[https://przyklad.pl](https://cathemathics.netlify.app/)" target="_blank" rel="noopener noreferrer">Live Version</a>, or download release from this repo ;D.
 
 Copyright (c) 2026 Piotr Kossakowski. This code is provided solely for personal and educational purposes. Any commercial use without the prior written consent of the author is strictly prohibited. 
