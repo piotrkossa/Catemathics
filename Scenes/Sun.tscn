@@ -1,0 +1,269 @@
+[gd_scene load_steps=23 format=3 uid="uid://cuyebx70f3ohq"]
+
+[ext_resource type="Script" path="res://Scripts/Sun.gd" id="1_2xyt2"]
+[ext_resource type="PackedScene" uid="uid://brvusyvbt3a7o" path="res://Characters/Player.tscn" id="2_02pcj"]
+[ext_resource type="Texture2D" uid="uid://cb8f3qchdwj65" path="res://Resources/Sun/top.png" id="2_jnvqn"]
+[ext_resource type="Texture2D" uid="uid://bptvelitqpd2t" path="res://Resources/Sun/floor.png" id="3_gflhy"]
+[ext_resource type="Texture2D" uid="uid://c5ht3kirqh0l3" path="res://Resources/InsideSun/bottom.png" id="4_2g7de"]
+[ext_resource type="Texture2D" uid="uid://cvpcaqdty7tyb" path="res://Resources/InsideSun/pilar.png" id="5_8fafn"]
+[ext_resource type="PackedScene" uid="uid://dr5ggwro11xyk" path="res://Scenes/ui.tscn" id="5_gtgqw"]
+[ext_resource type="Texture2D" uid="uid://bbogj5mu0gx7s" path="res://Resources/InsideSun/battery.png" id="6_cbfun"]
+[ext_resource type="PackedScene" uid="uid://c5rbfgc7wg2g7" path="res://Characters/Enemy.tscn" id="6_qpyy3"]
+[ext_resource type="PackedScene" uid="uid://5okoypvk1d5n" path="res://Scenes/Fighting.tscn" id="8_bjj42"]
+[ext_resource type="AudioStream" uid="uid://1m0g2swpmmx0" path="res://Resources/Music/AMBIENCE_SPACECRAFT_HOLD_LOOP.ogg" id="11_l301o"]
+[ext_resource type="AudioStream" uid="uid://dfj7mxjxmn60a" path="res://Resources/Music/AMBIENCE_TUNDRA_LOOP_01.ogg" id="12_qepu5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2jvrs"]
+size = Vector2(4, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cv15v"]
+size = Vector2(80, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wghja"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8hi4u"]
+size = Vector2(188, 6.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h5dn0"]
+size = Vector2(712, 16)
+
+[sub_resource type="Animation" id="Animation_uyspy"]
+resource_name = "pilar"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pilar:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-519, 64), Vector2(-521, 63), Vector2(-519, 64)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3j318"]
+_data = {
+"pilar": SubResource("Animation_uyspy")
+}
+
+[sub_resource type="Animation" id="Animation_rkgwn"]
+resource_name = "intro"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("background:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-40.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("insidesun_background:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-40.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_anskj"]
+resource_name = "outro"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("background:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, -40.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("insidesun_background:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, -40.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j555d"]
+_data = {
+"intro": SubResource("Animation_rkgwn"),
+"outro": SubResource("Animation_anskj")
+}
+
+[node name="Sun" type="Node2D"]
+script = ExtResource("1_2xyt2")
+
+[node name="Map" type="Node2D" parent="."]
+y_sort_enabled = true
+position = Vector2(-800, -96)
+
+[node name="Scene1" type="Node2D" parent="Map"]
+
+[node name="Top" type="TextureRect" parent="Map/Scene1"]
+z_index = 2
+offset_left = 800.0
+offset_top = 98.0
+offset_right = 1600.0
+offset_bottom = 338.0
+scale = Vector2(4, 4)
+texture = ExtResource("2_jnvqn")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Floor" type="TextureRect" parent="Map/Scene1"]
+offset_left = 800.0
+offset_top = 96.0
+offset_right = 1600.0
+offset_bottom = 336.0
+scale = Vector2(4, 4)
+texture = ExtResource("3_gflhy")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="ship_doors" type="StaticBody2D" parent="Map/Scene1" groups=["Interactable"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Scene1/ship_doors"]
+position = Vector2(3630, 490)
+shape = SubResource("RectangleShape2D_2jvrs")
+
+[node name="sun_doors" type="StaticBody2D" parent="Map/Scene1" groups=["Interactable"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Scene1/sun_doors"]
+visible = false
+position = Vector2(1316, 617)
+shape = SubResource("RectangleShape2D_cv15v")
+
+[node name="collisions" type="StaticBody2D" parent="Map/Scene1"]
+visible = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Scene1/collisions"]
+build_mode = 1
+polygon = PackedVector2Array(3630, 456, 3630, 528, 3536, 528, 3536, 532, 3280, 532, 3280, 700, 1256, 700, 1256, 620, 1256, 618, 1276, 618, 1356, 618, 1419, 620, 1422, 620, 3200, 620, 3200, 452, 3536, 452, 3536, 456)
+
+[node name="Scene2" type="Node2D" parent="Map"]
+y_sort_enabled = true
+
+[node name="surface" type="StaticBody2D" parent="Map/Scene2"]
+
+[node name="Surface" type="TextureRect" parent="Map/Scene2/surface"]
+offset_left = -523.0
+offset_top = 96.0
+offset_right = -203.0
+offset_bottom = 336.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_2g7de")
+stretch_mode = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Scene2/surface"]
+visible = false
+build_mode = 1
+polygon = PackedVector2Array(9, 1056, 9, 764, -231, 764, -231, 228, 465, 228, 465, 764, 225, 764, 225, 1056)
+
+[node name="Pilar" type="StaticBody2D" parent="Map/Scene2" groups=["Interactable"]]
+y_sort_enabled = true
+position = Vector2(-519, 64)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Scene2/Pilar"]
+position = Vector2(646, 370)
+shape = SubResource("RectangleShape2D_wghja")
+
+[node name="body" type="Node2D" parent="Map/Scene2/Pilar"]
+position = Vector2(647, 339)
+
+[node name="TRect" type="TextureRect" parent="Map/Scene2/Pilar/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -33.0
+offset_top = -29.0
+offset_right = -17.0
+offset_bottom = -6.0
+scale = Vector2(4, 4)
+texture = ExtResource("5_8fafn")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="artifact" type="TextureRect" parent="Map/Scene2/Pilar"]
+visible = false
+z_index = 1
+offset_left = 638.0
+offset_top = 351.0
+offset_right = 660.0
+offset_bottom = 359.0
+rotation = -1.5708
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("6_cbfun")
+stretch_mode = 2
+
+[node name="scene1_doors" type="StaticBody2D" parent="Map/Scene2" groups=["Interactable"]]
+position = Vector2(-523, 96)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Scene2/scene1_doors"]
+position = Vector2(642, 957)
+shape = SubResource("RectangleShape2D_8hi4u")
+
+[node name="enemy1" parent="Map/Scene2" instance=ExtResource("6_qpyy3")]
+position = Vector2(176, 568)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Map/Scene2/enemy1"]
+position = Vector2(-56, 0)
+shape = SubResource("RectangleShape2D_h5dn0")
+
+[node name="enemy2" parent="Map/Scene2" instance=ExtResource("6_qpyy3")]
+position = Vector2(72, 568)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Map/Scene2/enemy2"]
+position = Vector2(44, -8)
+shape = SubResource("RectangleShape2D_h5dn0")
+
+[node name="pilaranim" type="AnimationPlayer" parent="Map/Scene2"]
+libraries = {
+"": SubResource("AnimationLibrary_3j318")
+}
+
+[node name="Player" parent="Map" instance=ExtResource("2_02pcj")]
+position = Vector2(153, 678)
+
+[node name="Ui" parent="." instance=ExtResource("5_gtgqw")]
+offset_left = 580.069
+offset_top = 491.184
+offset_right = 580.069
+offset_bottom = 491.184
+metadata/_edit_lock_ = true
+
+[node name="Fighting" parent="." instance=ExtResource("8_bjj42")]
+
+[node name="background" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_l301o")
+volume_db = 1.0
+pitch_scale = 1.2
+
+[node name="insidesun_background" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_qepu5")
+volume_db = 1.0
+
+[node name="music_trans" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_j555d")
+}

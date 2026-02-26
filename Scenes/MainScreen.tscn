@@ -1,0 +1,312 @@
+[gd_scene load_steps=17 format=3 uid="uid://dsn26x1k8mn7r"]
+
+[ext_resource type="Script" path="res://Scripts/MainScreen.gd" id="1_hd0vm"]
+[ext_resource type="Texture2D" uid="uid://bompnw8v5ug6u" path="res://Resources/MainMenu/cosmos.png" id="2_87aqv"]
+[ext_resource type="Texture2D" uid="uid://v8ktj5q668py" path="res://Resources/MainMenu/button.png" id="3_qjj8j"]
+[ext_resource type="FontFile" uid="uid://b7lmplhatjpya" path="res://Resources/Other/PeaberryBase.ttf" id="4_lrrw0"]
+[ext_resource type="Texture2D" uid="uid://cdbi4bavg67nq" path="res://Resources/MainMenu/cursor.png" id="5_irljs"]
+[ext_resource type="Texture2D" uid="uid://40x5cad26dmt" path="res://Resources/MainMenu/button_short.png" id="6_6o62p"]
+[ext_resource type="AudioStream" uid="uid://cpgjirwvtqici" path="res://Resources/Music/Ludum Dare 32 - 05.ogg" id="7_nl77g"]
+[ext_resource type="AudioStream" uid="uid://bmm2m2t2hc76d" path="res://Resources/Music/FUI Button Beep Clean.wav" id="8_37uso"]
+[ext_resource type="AudioStream" uid="uid://c5xg4lxg4grnf" path="res://Resources/Music/FUI Holographic Button Press-1.wav" id="9_nyhmr"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1jhqw"]
+font = ExtResource("4_lrrw0")
+font_size = 145
+font_color = Color(0.907942, 0.907942, 0.907942, 1)
+outline_size = 20
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 25
+shadow_color = Color(0.473976, 0.473976, 0.473976, 1)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="Animation" id="Animation_0om44"]
+resource_name = "label_anim"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../../background:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-40.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h2wlm"]
+_data = {
+"label_anim": SubResource("Animation_0om44")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_ig7ct"]
+font = ExtResource("4_lrrw0")
+font_size = 35
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 10
+shadow_color = Color(0, 0.25098, 0.321569, 1)
+
+[sub_resource type="Animation" id="Animation_kqs25"]
+resource_name = "Background"
+length = 20.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 20),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-2560, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cli0w"]
+resource_name = "Transition"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../background:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -30.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oa0cf"]
+_data = {
+"Background": SubResource("Animation_kqs25"),
+"Transition": SubResource("Animation_cli0w")
+}
+
+[node name="Node" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 960.0
+script = ExtResource("1_hd0vm")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 2
+offset_right = 3840.0
+offset_bottom = 960.0
+texture = ExtResource("2_87aqv")
+stretch_mode = 4
+
+[node name="MainMenu" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="MainSite" type="VBoxContainer" parent="MainMenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 10
+alignment = 2
+
+[node name="Label" type="Label" parent="MainMenu/MainSite"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+text = "Catemathics"
+label_settings = SubResource("LabelSettings_1jhqw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MainMenu/MainSite/Label"]
+libraries = {
+"": SubResource("AnimationLibrary_h2wlm")
+}
+autoplay = "label_anim"
+
+[node name="Start" type="TextureRect" parent="MainMenu/MainSite"]
+custom_minimum_size = Vector2(600, 90)
+layout_mode = 2
+texture = ExtResource("3_qjj8j")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="MainMenu/MainSite/Start"]
+layout_mode = 0
+offset_left = 273.0
+offset_top = 12.0
+offset_right = 738.0
+offset_bottom = 78.0
+text = "Rozpocznij"
+label_settings = SubResource("LabelSettings_ig7ct")
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+
+[node name="cursor" type="TextureRect" parent="MainMenu/MainSite/Start"]
+layout_mode = 0
+offset_left = 207.0
+offset_top = 20.0
+offset_right = 257.0
+offset_bottom = 70.0
+texture = ExtResource("5_irljs")
+
+[node name="Options" type="TextureRect" parent="MainMenu/MainSite"]
+custom_minimum_size = Vector2(600, 90)
+layout_mode = 2
+texture = ExtResource("3_qjj8j")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="MainMenu/MainSite/Options"]
+layout_mode = 0
+offset_left = 273.0
+offset_top = 12.0
+offset_right = 738.0
+offset_bottom = 78.0
+text = "Opcje"
+label_settings = SubResource("LabelSettings_ig7ct")
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+
+[node name="cursor" type="TextureRect" parent="MainMenu/MainSite/Options"]
+visible = false
+layout_mode = 0
+offset_left = 207.0
+offset_top = 20.0
+offset_right = 257.0
+offset_bottom = 70.0
+texture = ExtResource("5_irljs")
+
+[node name="Exit" type="TextureRect" parent="MainMenu/MainSite"]
+custom_minimum_size = Vector2(600, 90)
+layout_mode = 2
+texture = ExtResource("3_qjj8j")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="MainMenu/MainSite/Exit"]
+layout_mode = 0
+offset_left = 273.0
+offset_top = 12.0
+offset_right = 738.0
+offset_bottom = 78.0
+text = "Wyjście"
+label_settings = SubResource("LabelSettings_ig7ct")
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+
+[node name="cursor" type="TextureRect" parent="MainMenu/MainSite/Exit"]
+visible = false
+layout_mode = 0
+offset_left = 207.0
+offset_top = 20.0
+offset_right = 257.0
+offset_bottom = 70.0
+texture = ExtResource("5_irljs")
+
+[node name="OptionSite" type="VBoxContainer" parent="MainMenu"]
+visible = false
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+theme_override_constants/separation = 25
+alignment = 2
+
+[node name="Back" type="TextureRect" parent="MainMenu/OptionSite"]
+custom_minimum_size = Vector2(500, 90)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 2
+texture = ExtResource("6_6o62p")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="MainMenu/OptionSite/Back"]
+layout_mode = 0
+offset_left = 148.0
+offset_top = 12.0
+offset_right = 420.0
+offset_bottom = 78.0
+text = "Powrót"
+label_settings = SubResource("LabelSettings_ig7ct")
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+
+[node name="cursor" type="TextureRect" parent="MainMenu/OptionSite/Back"]
+layout_mode = 0
+offset_left = 81.0
+offset_top = 20.0
+offset_right = 131.0
+offset_bottom = 70.0
+texture = ExtResource("5_irljs")
+
+[node name="Fullscreen" type="TextureRect" parent="MainMenu/OptionSite"]
+custom_minimum_size = Vector2(600, 90)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+size_flags_stretch_ratio = 6.0
+texture = ExtResource("3_qjj8j")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="MainMenu/OptionSite/Fullscreen"]
+layout_mode = 0
+offset_left = 101.0
+offset_top = 12.0
+offset_right = 566.0
+offset_bottom = 78.0
+text = "Pełny ekran"
+label_settings = SubResource("LabelSettings_ig7ct")
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 0
+
+[node name="cursor" type="TextureRect" parent="MainMenu/OptionSite/Fullscreen"]
+visible = false
+layout_mode = 0
+offset_left = 35.0
+offset_top = 20.0
+offset_right = 85.0
+offset_bottom = 70.0
+texture = ExtResource("5_irljs")
+
+[node name="Animations" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Background")
+libraries = {
+"": SubResource("AnimationLibrary_oa0cf")
+}
+autoplay = "Background"
+
+[node name="background" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_nl77g")
+volume_db = -40.0
+autoplay = true
+
+[node name="menu_navigate" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_37uso")
+volume_db = 6.0
+
+[node name="menu_accept" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_nyhmr")
+volume_db = 6.0
+
+[connection signal="ready" from="." to="." method="_on_ready"]

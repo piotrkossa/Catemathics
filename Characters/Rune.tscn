@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://dthaw28b0y2k3"]
+
+[ext_resource type="Texture2D" uid="uid://bc0k1ousxxfy4" path="res://Resources/Friends/Rune.png" id="1_0ryeu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_scysx"]
+atlas = ExtResource("1_0ryeu")
+region = Rect2(2, 2, 14, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8283"]
+atlas = ExtResource("1_0ryeu")
+region = Rect2(19, 2, 14, 27)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nb7b1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_scysx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h8283")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.5
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ti0dq"]
+size = Vector2(41, 11)
+
+[node name="Rune" type="StaticBody2D" groups=["Interactable"]]
+y_sort_enabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(0, -2)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_nb7b1")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.671752
+offset = Vector2(0, -13)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -5.5)
+shape = SubResource("RectangleShape2D_ti0dq")

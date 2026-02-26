@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://c5rbfgc7wg2g7"]
+
+[ext_resource type="Texture2D" uid="uid://cl18klggiqky5" path="res://Resources/Enemy/enemyidle.png" id="1_5w0sr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7wnw7"]
+atlas = ExtResource("1_5w0sr")
+region = Rect2(1, 0, 16, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kk3hb"]
+atlas = ExtResource("1_5w0sr")
+region = Rect2(18, 0, 16, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7s8ru"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7wnw7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kk3hb")
+}],
+"loop": true,
+"name": &"front_idle",
+"speed": 1.5
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ovuo"]
+size = Vector2(56, 12)
+
+[node name="Enemy" type="StaticBody2D" groups=["Interactable"]]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(0, 2)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_7s8ru")
+animation = &"front_idle"
+autoplay = "front_idle"
+frame_progress = 0.491878
+offset = Vector2(0, -13.49)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_8ovuo")

@@ -1,0 +1,2095 @@
+[gd_scene load_steps=30 format=3 uid="uid://rpj5qsvcw2eo"]
+
+[ext_resource type="Script" path="res://Scripts/Planet1.gd" id="1_3atyo"]
+[ext_resource type="Texture2D" uid="uid://fmjmwrr8fvy6" path="res://Resources/Planet1/surface.png" id="2_o2yrj"]
+[ext_resource type="Texture2D" uid="uid://cqid0f1xpiiqj" path="res://Resources/Planet1/trees.png" id="3_qrqr4"]
+[ext_resource type="Texture2D" uid="uid://dtwijap5p0pib" path="res://Resources/Planet1/moretrees.png" id="4_jgtfr"]
+[ext_resource type="Texture2D" uid="uid://cnecqul8ttr01" path="res://Resources/Planet1/tree.png" id="4_ltj2h"]
+[ext_resource type="Texture2D" uid="uid://cna8hfp6soesq" path="res://Resources/Planet1/evenmoretrees.png" id="5_2jmqq"]
+[ext_resource type="Texture2D" uid="uid://g50fap87ego3" path="res://Resources/Planet1/bush.png" id="6_agqfc"]
+[ext_resource type="PackedScene" uid="uid://brvusyvbt3a7o" path="res://Characters/Player.tscn" id="6_u4fce"]
+[ext_resource type="Texture2D" uid="uid://dxo1r3u44ojy2" path="res://Resources/Planet1/altana.png" id="8_ictys"]
+[ext_resource type="PackedScene" uid="uid://c5rbfgc7wg2g7" path="res://Characters/Enemy.tscn" id="10_xiv57"]
+[ext_resource type="PackedScene" uid="uid://dr5ggwro11xyk" path="res://Scenes/ui.tscn" id="11_eqg3t"]
+[ext_resource type="PackedScene" uid="uid://5okoypvk1d5n" path="res://Scenes/Fighting.tscn" id="11_novqh"]
+[ext_resource type="PackedScene" uid="uid://dthaw28b0y2k3" path="res://Characters/Rune.tscn" id="11_tnwj4"]
+[ext_resource type="Texture2D" uid="uid://d3s1n2eodu5tp" path="res://Resources/Sun/Starship.png" id="12_eotsl"]
+[ext_resource type="Texture2D" uid="uid://bbogj5mu0gx7s" path="res://Resources/InsideSun/battery.png" id="13_s1773"]
+[ext_resource type="AudioStream" uid="uid://cv0oinc0s5qsg" path="res://Resources/Music/Stream Loops 2024-02-21_01.ogg" id="17_y4p6x"]
+
+[sub_resource type="TileSet" id="TileSet_w4gtb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7elkx"]
+size = Vector2(76, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ejfvk"]
+size = Vector2(36, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_try7t"]
+size = Vector2(28, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yfqki"]
+size = Vector2(57, 486)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_77r74"]
+size = Vector2(435, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8emt5"]
+size = Vector2(74, 285)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xmtqk"]
+size = Vector2(306, 285)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h7uge"]
+size = Vector2(37, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xga2o"]
+size = Vector2(66, 24)
+
+[sub_resource type="Animation" id="Animation_vuoi1"]
+resource_name = "intro"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("background:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-40.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_ehxo8"]
+resource_name = "outro"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("background:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, -40.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pgf5c"]
+_data = {
+"intro": SubResource("Animation_vuoi1"),
+"outro": SubResource("Animation_ehxo8")
+}
+
+[node name="Planet1" type="Node2D"]
+script = ExtResource("1_3atyo")
+
+[node name="Map" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="TileMap" type="TileMap" parent="Map"]
+tile_set = SubResource("TileSet_w4gtb")
+format = 2
+
+[node name="surface" type="TextureRect" parent="Map"]
+offset_top = -39.0
+offset_right = 775.0
+offset_bottom = 761.0
+scale = Vector2(4, 4)
+texture = ExtResource("2_o2yrj")
+stretch_mode = 2
+
+[node name="Bushes" type="StaticBody2D" parent="Map"]
+y_sort_enabled = true
+
+[node name="Bush" type="StaticBody2D" parent="Map/Bushes"]
+y_sort_enabled = true
+
+[node name="Node2D" type="Node2D" parent="Map/Bushes/Bush"]
+position = Vector2(1737, 1009)
+
+[node name="TRect" type="TextureRect" parent="Map/Bushes/Bush/Node2D"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -37.0
+offset_top = -48.0
+offset_right = -18.0
+offset_bottom = -34.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_agqfc")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Bushes/Bush"]
+position = Vector2(1738, 1011)
+shape = SubResource("RectangleShape2D_7elkx")
+
+[node name="Bush2" type="StaticBody2D" parent="Map/Bushes"]
+y_sort_enabled = true
+
+[node name="Node2D" type="Node2D" parent="Map/Bushes/Bush2"]
+position = Vector2(1481, 1310)
+
+[node name="TRect" type="TextureRect" parent="Map/Bushes/Bush2/Node2D"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -37.0
+offset_top = -48.0
+offset_right = -18.0
+offset_bottom = -34.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_agqfc")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Bushes/Bush2"]
+position = Vector2(1482, 1312)
+shape = SubResource("RectangleShape2D_7elkx")
+
+[node name="Bush3" type="StaticBody2D" parent="Map/Bushes"]
+y_sort_enabled = true
+position = Vector2(544, -9)
+
+[node name="Node2D" type="Node2D" parent="Map/Bushes/Bush3"]
+position = Vector2(1481, 1310)
+
+[node name="TRect" type="TextureRect" parent="Map/Bushes/Bush3/Node2D"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -37.0
+offset_top = -48.0
+offset_right = -18.0
+offset_bottom = -34.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_agqfc")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Bushes/Bush3"]
+position = Vector2(1482, 1312)
+shape = SubResource("RectangleShape2D_7elkx")
+
+[node name="Bush4" type="StaticBody2D" parent="Map/Bushes"]
+y_sort_enabled = true
+position = Vector2(820, -313)
+
+[node name="Node2D" type="Node2D" parent="Map/Bushes/Bush4"]
+position = Vector2(1481, 1310)
+
+[node name="TRect" type="TextureRect" parent="Map/Bushes/Bush4/Node2D"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -37.0
+offset_top = -48.0
+offset_right = -18.0
+offset_bottom = -34.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_agqfc")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Bushes/Bush4"]
+position = Vector2(1482, 1312)
+shape = SubResource("RectangleShape2D_7elkx")
+
+[node name="Bush5" type="StaticBody2D" parent="Map/Bushes"]
+y_sort_enabled = true
+position = Vector2(980, 3)
+
+[node name="Node2D" type="Node2D" parent="Map/Bushes/Bush5"]
+position = Vector2(1481, 1310)
+
+[node name="TRect" type="TextureRect" parent="Map/Bushes/Bush5/Node2D"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -37.0
+offset_top = -48.0
+offset_right = -18.0
+offset_bottom = -34.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_agqfc")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Bushes/Bush5"]
+position = Vector2(1482, 1312)
+shape = SubResource("RectangleShape2D_7elkx")
+
+[node name="Bush6" type="StaticBody2D" parent="Map/Bushes"]
+y_sort_enabled = true
+position = Vector2(1308, -301)
+
+[node name="Node2D" type="Node2D" parent="Map/Bushes/Bush6"]
+position = Vector2(1481, 1310)
+
+[node name="TRect" type="TextureRect" parent="Map/Bushes/Bush6/Node2D"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -37.0
+offset_top = -48.0
+offset_right = -18.0
+offset_bottom = -34.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_agqfc")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Bushes/Bush6"]
+position = Vector2(1482, 1312)
+shape = SubResource("RectangleShape2D_7elkx")
+
+[node name="Bush7" type="StaticBody2D" parent="Map/Bushes"]
+y_sort_enabled = true
+position = Vector2(1176, 191)
+
+[node name="Node2D" type="Node2D" parent="Map/Bushes/Bush7"]
+position = Vector2(1481, 1310)
+
+[node name="TRect" type="TextureRect" parent="Map/Bushes/Bush7/Node2D"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -37.0
+offset_top = -48.0
+offset_right = -18.0
+offset_bottom = -34.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_agqfc")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Bushes/Bush7"]
+position = Vector2(1482, 1312)
+shape = SubResource("RectangleShape2D_7elkx")
+
+[node name="Bush8" type="StaticBody2D" parent="Map/Bushes"]
+y_sort_enabled = true
+position = Vector2(1488, 383)
+
+[node name="Node2D" type="Node2D" parent="Map/Bushes/Bush8"]
+position = Vector2(1481, 1310)
+
+[node name="TRect" type="TextureRect" parent="Map/Bushes/Bush8/Node2D"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -37.0
+offset_top = -48.0
+offset_right = -18.0
+offset_bottom = -34.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_agqfc")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Bushes/Bush8"]
+position = Vector2(1482, 1312)
+shape = SubResource("RectangleShape2D_7elkx")
+
+[node name="Bush9" type="StaticBody2D" parent="Map/Bushes"]
+y_sort_enabled = true
+position = Vector2(1492, 515)
+
+[node name="Node2D" type="Node2D" parent="Map/Bushes/Bush9"]
+position = Vector2(1481, 1310)
+
+[node name="TRect" type="TextureRect" parent="Map/Bushes/Bush9/Node2D"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -37.0
+offset_top = -48.0
+offset_right = -18.0
+offset_bottom = -34.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_agqfc")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Bushes/Bush9"]
+position = Vector2(1482, 1312)
+shape = SubResource("RectangleShape2D_7elkx")
+
+[node name="Bush10" type="StaticBody2D" parent="Map/Bushes"]
+y_sort_enabled = true
+position = Vector2(1176, 647)
+
+[node name="Node2D" type="Node2D" parent="Map/Bushes/Bush10"]
+position = Vector2(1481, 1310)
+
+[node name="TRect" type="TextureRect" parent="Map/Bushes/Bush10/Node2D"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -37.0
+offset_top = -48.0
+offset_right = -18.0
+offset_bottom = -34.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_agqfc")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Bushes/Bush10"]
+position = Vector2(1482, 1312)
+shape = SubResource("RectangleShape2D_7elkx")
+
+[node name="Bush11" type="StaticBody2D" parent="Map/Bushes"]
+y_sort_enabled = true
+position = Vector2(1492, 759)
+
+[node name="Node2D" type="Node2D" parent="Map/Bushes/Bush11"]
+position = Vector2(1481, 1310)
+
+[node name="TRect" type="TextureRect" parent="Map/Bushes/Bush11/Node2D"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -37.0
+offset_top = -48.0
+offset_right = -18.0
+offset_bottom = -34.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_agqfc")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Bushes/Bush11"]
+position = Vector2(1482, 1312)
+shape = SubResource("RectangleShape2D_7elkx")
+
+[node name="Bush12" type="StaticBody2D" parent="Map/Bushes"]
+y_sort_enabled = true
+position = Vector2(1492, 927)
+
+[node name="Node2D" type="Node2D" parent="Map/Bushes/Bush12"]
+position = Vector2(1481, 1310)
+
+[node name="TRect" type="TextureRect" parent="Map/Bushes/Bush12/Node2D"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -37.0
+offset_top = -48.0
+offset_right = -18.0
+offset_bottom = -34.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_agqfc")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Bushes/Bush12"]
+position = Vector2(1482, 1312)
+shape = SubResource("RectangleShape2D_7elkx")
+
+[node name="Bush13" type="StaticBody2D" parent="Map/Bushes"]
+y_sort_enabled = true
+position = Vector2(1172, 971)
+
+[node name="Node2D" type="Node2D" parent="Map/Bushes/Bush13"]
+position = Vector2(1481, 1310)
+
+[node name="TRect" type="TextureRect" parent="Map/Bushes/Bush13/Node2D"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -37.0
+offset_top = -48.0
+offset_right = -18.0
+offset_bottom = -34.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_agqfc")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Bushes/Bush13"]
+position = Vector2(1482, 1312)
+shape = SubResource("RectangleShape2D_7elkx")
+
+[node name="Bush14" type="StaticBody2D" parent="Map/Bushes"]
+y_sort_enabled = true
+position = Vector2(1492, 1199)
+
+[node name="Node2D" type="Node2D" parent="Map/Bushes/Bush14"]
+position = Vector2(1481, 1310)
+
+[node name="TRect" type="TextureRect" parent="Map/Bushes/Bush14/Node2D"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -37.0
+offset_top = -48.0
+offset_right = -18.0
+offset_bottom = -34.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_agqfc")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Bushes/Bush14"]
+position = Vector2(1482, 1312)
+shape = SubResource("RectangleShape2D_7elkx")
+
+[node name="Bush15" type="StaticBody2D" parent="Map/Bushes"]
+y_sort_enabled = true
+position = Vector2(1180, 1251)
+
+[node name="Node2D" type="Node2D" parent="Map/Bushes/Bush15"]
+position = Vector2(1481, 1310)
+
+[node name="TRect" type="TextureRect" parent="Map/Bushes/Bush15/Node2D"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -37.0
+offset_top = -48.0
+offset_right = -18.0
+offset_bottom = -34.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_agqfc")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Bushes/Bush15"]
+position = Vector2(1482, 1312)
+shape = SubResource("RectangleShape2D_7elkx")
+
+[node name="Bush16" type="StaticBody2D" parent="Map/Bushes"]
+y_sort_enabled = true
+position = Vector2(1496, 1347)
+
+[node name="Node2D" type="Node2D" parent="Map/Bushes/Bush16"]
+position = Vector2(1481, 1310)
+
+[node name="TRect" type="TextureRect" parent="Map/Bushes/Bush16/Node2D"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -37.0
+offset_top = -48.0
+offset_right = -18.0
+offset_bottom = -34.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_agqfc")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Bushes/Bush16"]
+position = Vector2(1482, 1312)
+shape = SubResource("RectangleShape2D_7elkx")
+
+[node name="Bush17" type="StaticBody2D" parent="Map/Bushes"]
+y_sort_enabled = true
+position = Vector2(1492, 1515)
+
+[node name="Node2D" type="Node2D" parent="Map/Bushes/Bush17"]
+position = Vector2(1481, 1310)
+
+[node name="TRect" type="TextureRect" parent="Map/Bushes/Bush17/Node2D"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -37.0
+offset_top = -48.0
+offset_right = -18.0
+offset_bottom = -34.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_agqfc")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Bushes/Bush17"]
+position = Vector2(1482, 1312)
+shape = SubResource("RectangleShape2D_7elkx")
+
+[node name="Bush18" type="StaticBody2D" parent="Map/Bushes"]
+y_sort_enabled = true
+position = Vector2(1488, 1703)
+
+[node name="Node2D" type="Node2D" parent="Map/Bushes/Bush18"]
+position = Vector2(1481, 1310)
+
+[node name="TRect" type="TextureRect" parent="Map/Bushes/Bush18/Node2D"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -37.0
+offset_top = -48.0
+offset_right = -18.0
+offset_bottom = -34.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_agqfc")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Bushes/Bush18"]
+position = Vector2(1482, 1312)
+shape = SubResource("RectangleShape2D_7elkx")
+
+[node name="Bush19" type="StaticBody2D" parent="Map/Bushes"]
+y_sort_enabled = true
+position = Vector2(1096, 1763)
+
+[node name="Node2D" type="Node2D" parent="Map/Bushes/Bush19"]
+position = Vector2(1481, 1310)
+
+[node name="TRect" type="TextureRect" parent="Map/Bushes/Bush19/Node2D"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -37.0
+offset_top = -48.0
+offset_right = -18.0
+offset_bottom = -34.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_agqfc")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Bushes/Bush19"]
+position = Vector2(1482, 1312)
+shape = SubResource("RectangleShape2D_7elkx")
+
+[node name="Bush20" type="StaticBody2D" parent="Map/Bushes"]
+y_sort_enabled = true
+position = Vector2(136, 1771)
+
+[node name="Node2D" type="Node2D" parent="Map/Bushes/Bush20"]
+position = Vector2(1481, 1310)
+
+[node name="TRect" type="TextureRect" parent="Map/Bushes/Bush20/Node2D"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -37.0
+offset_top = -48.0
+offset_right = -18.0
+offset_bottom = -34.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_agqfc")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Bushes/Bush20"]
+position = Vector2(1482, 1312)
+shape = SubResource("RectangleShape2D_7elkx")
+
+[node name="Bush21" type="StaticBody2D" parent="Map/Bushes"]
+y_sort_enabled = true
+position = Vector2(-264, 1675)
+
+[node name="Node2D" type="Node2D" parent="Map/Bushes/Bush21"]
+position = Vector2(1481, 1310)
+
+[node name="TRect" type="TextureRect" parent="Map/Bushes/Bush21/Node2D"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -37.0
+offset_top = -48.0
+offset_right = -18.0
+offset_bottom = -34.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_agqfc")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Bushes/Bush21"]
+position = Vector2(1482, 1312)
+shape = SubResource("RectangleShape2D_7elkx")
+
+[node name="Bush22" type="StaticBody2D" parent="Map/Bushes"]
+y_sort_enabled = true
+position = Vector2(-364, 1675)
+
+[node name="Node2D" type="Node2D" parent="Map/Bushes/Bush22"]
+position = Vector2(1481, 1310)
+
+[node name="TRect" type="TextureRect" parent="Map/Bushes/Bush22/Node2D"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -37.0
+offset_top = -48.0
+offset_right = -18.0
+offset_bottom = -34.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_agqfc")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Bushes/Bush22"]
+position = Vector2(1482, 1312)
+shape = SubResource("RectangleShape2D_7elkx")
+
+[node name="Bush23" type="StaticBody2D" parent="Map/Bushes"]
+y_sort_enabled = true
+position = Vector2(-472, 1678)
+
+[node name="Node2D" type="Node2D" parent="Map/Bushes/Bush23"]
+position = Vector2(1481, 1310)
+
+[node name="TRect" type="TextureRect" parent="Map/Bushes/Bush23/Node2D"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -37.0
+offset_top = -47.0
+offset_right = -18.0
+offset_bottom = -33.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_agqfc")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Bushes/Bush23"]
+position = Vector2(1482, 1313)
+shape = SubResource("RectangleShape2D_7elkx")
+
+[node name="Bush24" type="StaticBody2D" parent="Map/Bushes"]
+y_sort_enabled = true
+position = Vector2(-584, 1675)
+
+[node name="Node2D" type="Node2D" parent="Map/Bushes/Bush24"]
+position = Vector2(1481, 1310)
+
+[node name="TRect" type="TextureRect" parent="Map/Bushes/Bush24/Node2D"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -37.0
+offset_top = -48.0
+offset_right = -18.0
+offset_bottom = -34.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_agqfc")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Bushes/Bush24"]
+position = Vector2(1482, 1312)
+shape = SubResource("RectangleShape2D_7elkx")
+
+[node name="Bush25" type="StaticBody2D" parent="Map/Bushes"]
+y_sort_enabled = true
+position = Vector2(-696, 1675)
+
+[node name="Node2D" type="Node2D" parent="Map/Bushes/Bush25"]
+position = Vector2(1481, 1310)
+
+[node name="TRect" type="TextureRect" parent="Map/Bushes/Bush25/Node2D"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -37.0
+offset_top = -48.0
+offset_right = -18.0
+offset_bottom = -34.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_agqfc")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Bushes/Bush25"]
+position = Vector2(1482, 1312)
+shape = SubResource("RectangleShape2D_7elkx")
+
+[node name="Bush26" type="StaticBody2D" parent="Map/Bushes"]
+y_sort_enabled = true
+position = Vector2(-264, 1407)
+
+[node name="Node2D" type="Node2D" parent="Map/Bushes/Bush26"]
+position = Vector2(1493, 1306)
+
+[node name="TRect" type="TextureRect" parent="Map/Bushes/Bush26/Node2D"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -37.0
+offset_top = -48.0
+offset_right = -18.0
+offset_bottom = -34.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_agqfc")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Bushes/Bush26"]
+position = Vector2(1494, 1312)
+shape = SubResource("RectangleShape2D_7elkx")
+
+[node name="Bush27" type="StaticBody2D" parent="Map/Bushes"]
+y_sort_enabled = true
+position = Vector2(-364, 1407)
+
+[node name="Node2D" type="Node2D" parent="Map/Bushes/Bush27"]
+position = Vector2(1485, 1306)
+
+[node name="TRect" type="TextureRect" parent="Map/Bushes/Bush27/Node2D"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -37.0
+offset_top = -48.0
+offset_right = -18.0
+offset_bottom = -34.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_agqfc")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Bushes/Bush27"]
+position = Vector2(1486, 1312)
+shape = SubResource("RectangleShape2D_7elkx")
+
+[node name="Bush28" type="StaticBody2D" parent="Map/Bushes"]
+y_sort_enabled = true
+position = Vector2(-472, 1410)
+
+[node name="Node2D" type="Node2D" parent="Map/Bushes/Bush28"]
+position = Vector2(1477, 1307)
+
+[node name="TRect" type="TextureRect" parent="Map/Bushes/Bush28/Node2D"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -37.0
+offset_top = -48.0
+offset_right = -18.0
+offset_bottom = -34.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_agqfc")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Bushes/Bush28"]
+position = Vector2(1478, 1312)
+shape = SubResource("RectangleShape2D_7elkx")
+
+[node name="Bush29" type="StaticBody2D" parent="Map/Bushes"]
+y_sort_enabled = true
+position = Vector2(-584, 1407)
+
+[node name="Node2D" type="Node2D" parent="Map/Bushes/Bush29"]
+position = Vector2(1481, 1310)
+
+[node name="TRect" type="TextureRect" parent="Map/Bushes/Bush29/Node2D"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -37.0
+offset_top = -48.0
+offset_right = -18.0
+offset_bottom = -34.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_agqfc")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Bushes/Bush29"]
+position = Vector2(1482, 1312)
+shape = SubResource("RectangleShape2D_7elkx")
+
+[node name="Bush30" type="StaticBody2D" parent="Map/Bushes"]
+y_sort_enabled = true
+position = Vector2(-692, 1407)
+
+[node name="Node2D" type="Node2D" parent="Map/Bushes/Bush30"]
+position = Vector2(1481, 1310)
+
+[node name="TRect" type="TextureRect" parent="Map/Bushes/Bush30/Node2D"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -37.0
+offset_top = -48.0
+offset_right = -18.0
+offset_bottom = -34.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_agqfc")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Bushes/Bush30"]
+position = Vector2(1482, 1312)
+shape = SubResource("RectangleShape2D_7elkx")
+
+[node name="Trees" type="StaticBody2D" parent="Map"]
+y_sort_enabled = true
+
+[node name="tree" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree2" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-84, 52)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree2"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree2/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree2"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree3" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-164, -4)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree3"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree3/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree3"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree4" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-292, 48)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree4"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree4/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree4"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree5" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-388, -8)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree5"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree5/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree5"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree6" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-496, 88)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree6"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree6/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree6"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree7" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-552, -4)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree7"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree7/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree7"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree8" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-672, 80)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree8"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree8/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree8"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree9" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-736, -20)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree9"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree9/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree9"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree10" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-884, 52)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree10"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree10/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree10"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree11" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-1040, 52)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree11"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree11/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree11"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree12" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-1004, -52)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree12"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree12/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree12"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree13" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-1172, -44)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree13"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree13/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree13"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree14" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-896, -148)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree14"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree14/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree14"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree15" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-1024, -204)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree15"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree15/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree15"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree16" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-1156, -208)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree16"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree16/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree16"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree17" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-896, -292)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree17"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree17/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree17"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree18" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-1020, -392)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree18"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree18/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree18"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree19" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-1104, -300)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree19"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree19/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree19"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree20" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-1100, -300)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree20"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree20/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree20"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree21" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-1164, -400)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree21"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree21/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree21"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree22" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-1036, -524)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree22"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree22/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree22"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree23" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-908, -528)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree23"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree23/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree23"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree24" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-772, -524)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree24"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree24/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree24"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree25" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-1160, -592)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree25"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree25/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree25"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree26" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-860, -696)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree26"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree26/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree26"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree27" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-1068, -700)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree27"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree27/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree27"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree28" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-952, -644)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree28"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree28/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree28"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree29" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-512, -600)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree29"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree29/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree29"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree30" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-580, -684)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree30"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree30/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree30"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree31" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-684, -688)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree31"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree31/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree31"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree32" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-792, -628)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree32"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree32/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree32"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree33" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-892, -400)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree33"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree33/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree33"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree34" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-392, -540)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree34"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree34/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree34"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree35" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-292, -692)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree35"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree35/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree35"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree36" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-316, -604)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree36"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree36/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree36"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree37" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-412, -704)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree37"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree37/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree37"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree38" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-188, -692)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree38"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree38/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree38"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree39" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-104, -620)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree39"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree39/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree39"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree40" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(20, -680)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree40"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree40/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree40"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree41" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(32, -580)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree41"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree41/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree41"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree42" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-192, -524)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree42"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree42/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree42"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree43" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-116, -444)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree43"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree43/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree43"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree44" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(36, -444)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree44"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree44/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree44"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree45" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-48, -524)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree45"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree45/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree45"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree46" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-296, -448)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree46"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree46/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree46"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="tree47" type="StaticBody2D" parent="Map/Trees"]
+y_sort_enabled = true
+position = Vector2(-460, -448)
+metadata/_edit_group_ = true
+
+[node name="body" type="Node2D" parent="Map/Trees/tree47"]
+position = Vector2(1211, 3077)
+
+[node name="TRect" type="TextureRect" parent="Map/Trees/tree47/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -35.0
+offset_top = -68.0
+offset_right = -18.0
+offset_bottom = -48.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_ltj2h")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Trees/tree47"]
+position = Vector2(1210, 3083)
+shape = SubResource("RectangleShape2D_ejfvk")
+
+[node name="trees2" type="Node2D" parent="Map"]
+
+[node name="tree" type="Node2D" parent="Map/trees2"]
+
+[node name="TRect" type="TextureRect" parent="Map/trees2/tree"]
+z_index = 2
+offset_left = -52.0
+offset_top = 1689.0
+offset_right = 300.0
+offset_bottom = 1712.0
+scale = Vector2(4, 4)
+texture = ExtResource("3_qrqr4")
+stretch_mode = 2
+
+[node name="tree2" type="Node2D" parent="Map/trees2"]
+
+[node name="TRect" type="TextureRect" parent="Map/trees2/tree2"]
+z_index = 2
+offset_left = 1284.0
+offset_top = 1325.0
+offset_right = 1636.0
+offset_bottom = 1348.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_jgtfr")
+stretch_mode = 2
+
+[node name="tree3" type="Node2D" parent="Map/trees2"]
+
+[node name="TRect" type="TextureRect" parent="Map/trees2/tree3"]
+z_index = 2
+offset_left = 1304.0
+offset_top = 2933.0
+offset_right = 1333.0
+offset_bottom = 2952.0
+scale = Vector2(4, 4)
+texture = ExtResource("5_2jmqq")
+stretch_mode = 2
+
+[node name="altana" type="StaticBody2D" parent="Map"]
+y_sort_enabled = true
+position = Vector2(572, 2889)
+metadata/_edit_group_ = true
+
+[node name="Node2D" type="Node2D" parent="Map/altana"]
+
+[node name="TRect" type="TextureRect" parent="Map/altana/Node2D"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -168.0
+offset_top = -400.0
+offset_right = -85.0
+offset_bottom = -299.0
+scale = Vector2(4, 4)
+texture = ExtResource("8_ictys")
+stretch_mode = 2
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Map/altana"]
+position = Vector2(-130, -6)
+shape = SubResource("RectangleShape2D_try7t")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Map/altana"]
+position = Vector2(122, -6)
+shape = SubResource("RectangleShape2D_try7t")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Map/altana"]
+position = Vector2(-130, -164)
+shape = SubResource("RectangleShape2D_try7t")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Map/altana"]
+position = Vector2(122, -164)
+shape = SubResource("RectangleShape2D_try7t")
+
+[node name="collisions" type="StaticBody2D" parent="Map"]
+visible = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/collisions"]
+build_mode = 1
+polygon = PackedVector2Array(0, 65, 1284, 65, 1284, 945, 1348, 957, 3032, 957, 3032, 3161, 2232, 3161, 2232, 2961, 2232, 2953, 2220, 2945, 1920, 2945, 1904, 2957, 1904, 2961, 1912, 2961, 1912, 3161, 1420, 3161, 1420, 2989, 1416, 2973, 1308, 2973, 1304, 2982, 1304, 3161, 0, 3161, 0, 2297, 1297, 2299, 1296, 2696, 1312, 2709, 1348, 2709, 1364, 2717, 1399, 2717, 1416, 2725, 1896, 2725, 1912, 2710, 2224, 2710, 2236, 2725, 2564, 2725, 2559.92, 2694.06, 2571, 2693, 2624, 2694, 2624, 1385, 1284, 1385, 1284, 1751, 0, 1751)
+
+[node name="Player" parent="Map" instance=ExtResource("6_u4fce")]
+position = Vector2(645, 381)
+
+[node name="Enemy1" parent="Map" instance=ExtResource("10_xiv57")]
+position = Vector2(1613, 1138)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Map/Enemy1"]
+position = Vector2(-0.5, 31)
+shape = SubResource("RectangleShape2D_yfqki")
+
+[node name="Enemy2" parent="Map" instance=ExtResource("10_xiv57")]
+position = Vector2(2810, 1735)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Map/Enemy2"]
+position = Vector2(16.5, -1)
+shape = SubResource("RectangleShape2D_77r74")
+
+[node name="Enemy3" parent="Map" instance=ExtResource("10_xiv57")]
+position = Vector2(2081, 2836)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Map/Enemy3"]
+position = Vector2(8, -2.5)
+shape = SubResource("RectangleShape2D_8emt5")
+
+[node name="Enemy4" parent="Map" instance=ExtResource("10_xiv57")]
+position = Vector2(571, 2856)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Map/Enemy4"]
+visible = false
+position = Vector2(-9, -4)
+shape = SubResource("RectangleShape2D_xmtqk")
+
+[node name="Rune" parent="Map" instance=ExtResource("11_tnwj4")]
+position = Vector2(2065, 2883)
+rotation = -1.5708
+
+[node name="aircraft" type="StaticBody2D" parent="Map"]
+
+[node name="TRect" type="TextureRect" parent="Map/aircraft"]
+offset_left = 398.0
+offset_top = 566.0
+offset_right = 517.0
+offset_bottom = 746.0
+rotation = -1.5708
+scale = Vector2(4, 4)
+texture = ExtResource("12_eotsl")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/aircraft"]
+build_mode = 1
+polygon = PackedVector2Array(1046, 566, 1062, 426, 1074, 426, 1074, 398, 1090, 406, 1118, 406, 1118, 354, 1118, 250, 1074, 230, 1063, 230, 1046, 90, 1034, 90, 1010, 94, 1010, 98, 986, 98, 962, 102, 938, 106, 919, 114, 723, 242, 546, 242, 526, 246, 526, 250, 510, 250, 490, 254, 478, 258, 454, 270, 414, 298, 398, 319, 398, 337, 402, 345, 414, 358, 438, 374, 442, 378, 478, 398, 490, 402, 546, 413, 606, 414, 606, 510, 607, 510, 607, 410, 678, 410, 677, 510, 678, 510, 678, 414, 730, 414, 730, 417, 920, 542, 963, 553)
+
+[node name="doors" type="StaticBody2D" parent="Map/aircraft" groups=["Interactable"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/aircraft/doors"]
+position = Vector2(642.5, 411)
+shape = SubResource("RectangleShape2D_h7uge")
+
+[node name="battery" type="StaticBody2D" parent="Map" groups=["Interactable"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/battery"]
+visible = false
+position = Vector2(519, 2900)
+shape = SubResource("RectangleShape2D_xga2o")
+
+[node name="TextureRect" type="TextureRect" parent="Map/battery"]
+offset_left = 486.0
+offset_top = 2888.0
+offset_right = 508.0
+offset_bottom = 2896.0
+scale = Vector2(3, 3)
+texture = ExtResource("13_s1773")
+stretch_mode = 2
+
+[node name="Ui" parent="." instance=ExtResource("11_eqg3t")]
+offset_left = 1613.0
+offset_top = 1138.0
+offset_right = 1613.0
+offset_bottom = 1138.0
+metadata/_edit_lock_ = true
+
+[node name="Fighting" parent="." instance=ExtResource("11_novqh")]
+visible = false
+
+[node name="background" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_y4p6x")
+volume_db = 1.0
+
+[node name="music_trans" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_pgf5c")
+}

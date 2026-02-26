@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c5xg4lxg4grnf"
+path="res://.godot/imported/FUI Holographic Button Press-1.wav-bb55437653111e06b5b87efb4e1434e0.sample"
+
+[deps]
+
+source_file="res://Resources/Music/FUI Holographic Button Press-1.wav"
+dest_files=["res://.godot/imported/FUI Holographic Button Press-1.wav-bb55437653111e06b5b87efb4e1434e0.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

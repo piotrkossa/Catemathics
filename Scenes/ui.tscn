@@ -1,0 +1,545 @@
+[gd_scene load_steps=33 format=3 uid="uid://dr5ggwro11xyk"]
+
+[ext_resource type="Texture2D" uid="uid://bpkh78okg8apq" path="res://Resources/Other/Interaction.png" id="1_q7t5q"]
+[ext_resource type="Script" path="res://Scripts/ui.gd" id="1_x85n4"]
+[ext_resource type="FontFile" uid="uid://b7lmplhatjpya" path="res://Resources/Other/PeaberryBase.ttf" id="2_3d5tw"]
+[ext_resource type="Texture2D" uid="uid://tenfa7kojma0" path="res://Resources/Other/Dialog.png" id="4_onj18"]
+[ext_resource type="Texture2D" uid="uid://boa4hih11iipl" path="res://Characters/profiles/Cat.png" id="5_f0h40"]
+[ext_resource type="Texture2D" uid="uid://c3nuw1wkqlgj8" path="res://Characters/profiles/LandingTable.png" id="6_77k0i"]
+[ext_resource type="Texture2D" uid="uid://dva0cbdkabylt" path="res://Characters/profiles/InfoTable.png" id="7_vqkhe"]
+[ext_resource type="Texture2D" uid="uid://dxkkvq8iyy7n1" path="res://Resources/Other/Choice.png" id="8_acrsx"]
+[ext_resource type="Texture2D" uid="uid://dkcnc0coyy5ak" path="res://Characters/profiles/MusicTable.png" id="8_bvacr"]
+[ext_resource type="Texture2D" uid="uid://40x5cad26dmt" path="res://Resources/MainMenu/button_short.png" id="9_cd7id"]
+[ext_resource type="Texture2D" uid="uid://d1dkivqpacvmi" path="res://Characters/profiles/FreezingTable.png" id="9_y54dy"]
+[ext_resource type="Texture2D" uid="uid://cwwuqqxeaqtmw" path="res://Characters/profiles/Radio.png" id="10_7mitw"]
+[ext_resource type="Texture2D" uid="uid://cdbi4bavg67nq" path="res://Resources/MainMenu/cursor.png" id="10_jp2h7"]
+[ext_resource type="Texture2D" uid="uid://du1deelonngik" path="res://Characters/profiles/Enemy.png" id="11_w7iyv"]
+[ext_resource type="Texture2D" uid="uid://bmr7ndldu8ixl" path="res://Characters/profiles/Rune.png" id="12_tfp6x"]
+[ext_resource type="Texture2D" uid="uid://bdh63rcuqb8um" path="res://Characters/profiles/Chef.png" id="13_7lidb"]
+[ext_resource type="AudioStream" uid="uid://bmm2m2t2hc76d" path="res://Resources/Music/FUI Button Beep Clean.wav" id="17_0wvyq"]
+[ext_resource type="AudioStream" uid="uid://c5xg4lxg4grnf" path="res://Resources/Music/FUI Holographic Button Press-1.wav" id="18_0nhj0"]
+[ext_resource type="AudioStream" uid="uid://c0c6k6f2awl6c" path="res://Resources/Music/FUI Holographic Interaction Radiate.wav" id="19_v7rcu"]
+[ext_resource type="AudioStream" uid="uid://b5dn7jfm4dga7" path="res://Resources/Music/Stream Loops 2024-02-28_02.ogg" id="20_5ihu2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_snvot"]
+font = ExtResource("2_3d5tw")
+font_size = 34
+font_color = Color(0, 0, 0, 1)
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 0
+shadow_offset = Vector2(0, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_j4hpt"]
+font = ExtResource("2_3d5tw")
+font_size = 40
+font_color = Color(0, 0, 0, 1)
+shadow_size = 0
+shadow_offset = Vector2(0, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_utvv6"]
+font = ExtResource("2_3d5tw")
+font_size = 120
+
+[sub_resource type="LabelSettings" id="LabelSettings_coiio"]
+font = ExtResource("2_3d5tw")
+font_size = 60
+font_color = Color(0.779291, 0.779291, 0.779291, 1)
+
+[sub_resource type="Animation" id="Animation_gktm3"]
+resource_name = "dead"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DeadScreen/Label:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DeadScreen/Label2:visible_ratio")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.2, 6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_rxgxx"]
+resource_name = "show_text"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dialog/Text:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vji05"]
+_data = {
+"dead": SubResource("Animation_gktm3"),
+"show_text": SubResource("Animation_rxgxx")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_pc1w6"]
+font = ExtResource("2_3d5tw")
+font_size = 40
+font_color = Color(0, 0, 0, 1)
+outline_color = Color(1, 1, 1, 0)
+shadow_size = 0
+shadow_offset = Vector2(0, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_e5mcv"]
+font = ExtResource("2_3d5tw")
+font_size = 60
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_vuoi1"]
+resource_name = "intro"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("background:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-40.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_ehxo8"]
+resource_name = "outro"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("background:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, -40.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pgf5c"]
+_data = {
+"intro": SubResource("Animation_vuoi1"),
+"outro": SubResource("Animation_ehxo8")
+}
+
+[node name="Ui" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x85n4")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="InteractionPrompt" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+
+[node name="TRect" type="TextureRect" parent="CanvasLayer/InteractionPrompt"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 984.0
+offset_top = 872.0
+offset_right = 1075.0
+offset_bottom = 893.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(3, 3)
+texture = ExtResource("1_q7t5q")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/InteractionPrompt"]
+layout_mode = 0
+offset_left = 1032.0
+offset_top = 888.0
+offset_right = 1221.0
+offset_bottom = 923.0
+text = "Kliknij   E"
+label_settings = SubResource("LabelSettings_snvot")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Dialog" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 704.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="prompt" type="TextureRect" parent="CanvasLayer/Dialog"]
+layout_mode = 0
+offset_left = 140.0
+offset_top = 32.0
+offset_right = 390.0
+offset_bottom = 79.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_onj18")
+stretch_mode = 2
+
+[node name="Text" type="Label" parent="CanvasLayer/Dialog"]
+layout_mode = 0
+offset_left = 344.0
+offset_top = 52.0
+offset_right = 1120.0
+offset_bottom = 200.0
+label_settings = SubResource("LabelSettings_j4hpt")
+vertical_alignment = 1
+autowrap_mode = 3
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="Profiles" type="Control" parent="CanvasLayer/Dialog"]
+anchors_preset = 0
+offset_left = 151.0
+offset_top = 44.0
+offset_right = 316.0
+offset_bottom = 208.0
+
+[node name="Cat" type="TextureRect" parent="CanvasLayer/Dialog/Profiles"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -82.0
+offset_right = 82.0
+offset_bottom = 82.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_f0h40")
+stretch_mode = 5
+
+[node name="LandingTable" type="TextureRect" parent="CanvasLayer/Dialog/Profiles"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -82.0
+offset_right = 82.0
+offset_bottom = 82.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_77k0i")
+stretch_mode = 5
+
+[node name="InfoTable" type="TextureRect" parent="CanvasLayer/Dialog/Profiles"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -82.0
+offset_right = 82.0
+offset_bottom = 82.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_vqkhe")
+stretch_mode = 5
+
+[node name="MusicTable" type="TextureRect" parent="CanvasLayer/Dialog/Profiles"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -82.0
+offset_right = 82.0
+offset_bottom = 82.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_bvacr")
+stretch_mode = 5
+
+[node name="FreezingTable" type="TextureRect" parent="CanvasLayer/Dialog/Profiles"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -82.0
+offset_right = 82.0
+offset_bottom = 82.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_y54dy")
+stretch_mode = 5
+
+[node name="Radio" type="TextureRect" parent="CanvasLayer/Dialog/Profiles"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -82.0
+offset_right = 82.0
+offset_bottom = 82.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_7mitw")
+stretch_mode = 5
+
+[node name="Enemy" type="TextureRect" parent="CanvasLayer/Dialog/Profiles"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -82.0
+offset_right = 82.0
+offset_bottom = 82.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_w7iyv")
+stretch_mode = 5
+
+[node name="Rune" type="TextureRect" parent="CanvasLayer/Dialog/Profiles"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -82.0
+offset_right = 82.0
+offset_bottom = 82.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_tfp6x")
+stretch_mode = 5
+
+[node name="Chef" type="TextureRect" parent="CanvasLayer/Dialog/Profiles"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -82.0
+offset_right = 82.0
+offset_bottom = 82.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_7lidb")
+stretch_mode = 5
+
+[node name="DeadScreen" type="Control" parent="CanvasLayer"]
+visible = false
+self_modulate = Color(0, 0, 0, 0)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 960.0
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/DeadScreen"]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 960.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer/DeadScreen"]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 480.0
+text = "Przegrałeś"
+label_settings = SubResource("LabelSettings_utvv6")
+horizontal_alignment = 1
+vertical_alignment = 2
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="Label2" type="Label" parent="CanvasLayer/DeadScreen"]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 512.0
+offset_right = 1088.0
+offset_bottom = 956.0
+text = "Kliknij enter aby powrócić do punktu kontrolnego"
+label_settings = SubResource("LabelSettings_coiio")
+horizontal_alignment = 1
+autowrap_mode = 3
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+libraries = {
+"": SubResource("AnimationLibrary_vji05")
+}
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="ChoicePrompt" type="Control" parent="CanvasLayer2"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 960.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer2/ChoicePrompt"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -960.0
+offset_bottom = -720.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4, 4)
+theme_override_constants/separation = -160
+
+[node name="prompt" type="TextureRect" parent="CanvasLayer2/ChoicePrompt/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+texture = ExtResource("8_acrsx")
+stretch_mode = 5
+
+[node name="Text" type="Label" parent="CanvasLayer2/ChoicePrompt/VBoxContainer/prompt"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 4.0
+offset_right = 789.0
+offset_bottom = 158.0
+scale = Vector2(0.25, 0.25)
+label_settings = SubResource("LabelSettings_pc1w6")
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer2/ChoicePrompt/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+
+[node name="yes" type="TextureRect" parent="CanvasLayer2/ChoicePrompt/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("9_cd7id")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="CanvasLayer2/ChoicePrompt/VBoxContainer/HBoxContainer/yes"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 5.0
+offset_right = 302.0
+offset_bottom = 67.0
+scale = Vector2(0.25, 0.25)
+text = "TAK"
+label_settings = SubResource("LabelSettings_e5mcv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="cursor" type="TextureRect" parent="CanvasLayer2/ChoicePrompt/VBoxContainer/HBoxContainer/yes"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 18.0
+offset_bottom = 18.0
+texture = ExtResource("10_jp2h7")
+stretch_mode = 2
+
+[node name="no" type="TextureRect" parent="CanvasLayer2/ChoicePrompt/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("9_cd7id")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="CanvasLayer2/ChoicePrompt/VBoxContainer/HBoxContainer/no"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 5.0
+offset_right = 302.0
+offset_bottom = 67.0
+scale = Vector2(0.25, 0.25)
+text = "NIE"
+label_settings = SubResource("LabelSettings_e5mcv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="cursor" type="TextureRect" parent="CanvasLayer2/ChoicePrompt/VBoxContainer/HBoxContainer/no"]
+visible = false
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 18.0
+offset_bottom = 18.0
+texture = ExtResource("10_jp2h7")
+stretch_mode = 2
+
+[node name="menu_navigate" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_0wvyq")
+volume_db = 6.0
+
+[node name="menu_accept" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("18_0nhj0")
+volume_db = 6.0
+
+[node name="menu_dialog" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("19_v7rcu")
+volume_db = 6.0
+
+[node name="background" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_5ihu2")
+volume_db = -40.0
+pitch_scale = 0.8
+
+[node name="music_trans" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_pgf5c")
+}

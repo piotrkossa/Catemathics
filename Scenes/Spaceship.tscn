@@ -1,0 +1,638 @@
+[gd_scene load_steps=40 format=3 uid="uid://bn1kvh82qla7j"]
+
+[ext_resource type="Script" path="res://Scripts/Spaceship.gd" id="1_5gcmm"]
+[ext_resource type="Texture2D" uid="uid://dvl8rr550fw5f" path="res://Resources/Spaceship/Cabin/infotable.png" id="2_68yql"]
+[ext_resource type="Texture2D" uid="uid://c42a54by3w7rq" path="res://Resources/Spaceship/Cabin/cabin_cosmos.png" id="2_xwvt0"]
+[ext_resource type="Texture2D" uid="uid://c3lm4iop7nfi8" path="res://Resources/Spaceship/Cabin/cabin_planet.png" id="3_ghvkp"]
+[ext_resource type="PackedScene" uid="uid://brvusyvbt3a7o" path="res://Characters/Player.tscn" id="3_iwq7o"]
+[ext_resource type="Texture2D" uid="uid://ci86sddi1nr6u" path="res://Resources/Spaceship/Cabin/musictable.png" id="3_la8xg"]
+[ext_resource type="Texture2D" uid="uid://ceb72sbq0uqvf" path="res://Resources/Spaceship/Cabin/cabin_no_galactic.png" id="4_lq6p3"]
+[ext_resource type="Texture2D" uid="uid://mn0o4a63gi7q" path="res://Resources/Spaceship/Cabin/landingtable.png" id="4_vmcqi"]
+[ext_resource type="Texture2D" uid="uid://dix01amfgaip" path="res://Resources/Spaceship/FreezeRoom/freezeroom.png" id="4_wu07t"]
+[ext_resource type="Texture2D" uid="uid://cp77fs8ajd3wf" path="res://Resources/Spaceship/Corridor/corridor.png" id="6_jyj1c"]
+[ext_resource type="Texture2D" uid="uid://btob2ktmfiieu" path="res://Resources/Spaceship/Cabin/radio.png" id="6_q826g"]
+[ext_resource type="Texture2D" uid="uid://crcjedev18x5t" path="res://Resources/Spaceship/Corridor/doors.png" id="7_jsm77"]
+[ext_resource type="Texture2D" uid="uid://ca55v2s0xejp6" path="res://Resources/Spaceship/FreezeRoom/freezer.png" id="8_x64xg"]
+[ext_resource type="Texture2D" uid="uid://dma5s806kjob3" path="res://Resources/Spaceship/FreezeRoom/table_act.png" id="9_sbqvs"]
+[ext_resource type="PackedScene" uid="uid://dr5ggwro11xyk" path="res://Scenes/ui.tscn" id="9_wm8rs"]
+[ext_resource type="Texture2D" uid="uid://bc6ujkjbsp5ya" path="res://Resources/Spaceship/FreezeRoom/table_deact.png" id="10_4haa5"]
+[ext_resource type="Texture2D" uid="uid://cb1lwh0u0ugay" path="res://Resources/Spaceship/FreezeRoom/particles.png" id="14_wl204"]
+[ext_resource type="FontFile" uid="uid://b7lmplhatjpya" path="res://Resources/Other/PeaberryBase.ttf" id="15_he0j8"]
+[ext_resource type="AudioStream" uid="uid://cpgjirwvtqici" path="res://Resources/Music/Ludum Dare 32 - 05.ogg" id="20_vej5g"]
+[ext_resource type="AudioStream" uid="uid://c4cnyeqppiq7f" path="res://Resources/Music/Glyph Activation Warm Aura.wav" id="21_8emqr"]
+[ext_resource type="AudioStream" uid="uid://dw37l48hl3jqe" path="res://Resources/Music/Patreon Challenge - 03.ogg" id="21_cdvlr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_boq4c"]
+size = Vector2(77, 142)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6fu60"]
+size = Vector2(75, 143.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4h4tx"]
+size = Vector2(144, 72)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4i5rq"]
+size = Vector2(80, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mvumo"]
+size = Vector2(160, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4vmtc"]
+size = Vector2(77, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e6b17"]
+size = Vector2(144.5, 72)
+
+[sub_resource type="Animation" id="Animation_3cw3y"]
+resource_name = "awaking"
+length = 35.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Map/Player:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(25.2, 31.8, 35.1),
+"transitions": PackedFloat32Array(1, 1, 0.277392),
+"update": 0,
+"values": [Vector2(1371, 1562), Vector2(1371, 1562), Vector2(1244, 1565)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(19.6, 28.2),
+"transitions": PackedFloat32Array(2, 3.24901),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Map/Player:process_mode")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 35.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [4, 0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimationPlayer/Canvas/awaking/intro/Label:text")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2.3, 6.6, 12.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": ["35?", "35 jesteś tam?", "Nadszedł czas twojej 
+misji", "Obudź się
+Obudź się
+Obudź się
+Obudź się
+Obudź się"]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AnimationPlayer/Canvas/awaking/intro/Label:visible_ratio")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3, 2, 2.3, 3.8, 5.4, 6.6, 8.4, 10.2, 11.5, 12.2, 12.9, 13.2, 13.9, 14.2, 14.9, 15.2, 15.9, 16.2, 16.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.21, 0.21, 0.395, 0.395, 0.606, 0.606, 0.807, 0.807, 1.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AnimationPlayer/Canvas/awaking/outro:self_modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(12.2, 18, 19.5, 25),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AnimationPlayer/Canvas/awaking/intro:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 18.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("AnimationPlayer/Canvas/awaking/outro:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(12.2, 25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Map/FreezeRoom/FreezingTable/freezed:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.1, 28.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Map/FreezeRoom/FreezingTable/unfreeezed:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 28.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("lightspeedsound:playing")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(12.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_2272w"]
+resource_name = "freezing"
+length = 7.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Map/Player:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 25.2, 31.8, 35.1),
+"transitions": PackedFloat32Array(1, 1, 1, 0.277392),
+"update": 0,
+"values": [Vector2(1371, 1560), Vector2(1371, 1562), Vector2(1371, 1562), Vector2(1244, 1565)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 28.2),
+"transitions": PackedFloat32Array(1, 1, 3.24901),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPlayer/Canvas/freezing/ColorRect:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimationPlayer/Canvas/freezing/ColorRect:self_modulate")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(6, 7.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wh0xf"]
+_data = {
+"awaking": SubResource("Animation_3cw3y"),
+"freezing": SubResource("Animation_2272w")
+}
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sjrce"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(2, 2, 0)
+emission_shape = 3
+emission_box_extents = Vector3(14, 30, 0)
+gravity = Vector3(0, 98, 0)
+scale_min = 3.0
+scale_max = 5.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_p1oig"]
+font = ExtResource("15_he0j8")
+font_size = 100
+
+[sub_resource type="Animation" id="Animation_vuoi1"]
+resource_name = "intro"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("background:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-40.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_ehxo8"]
+resource_name = "outro"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("background:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, -40.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pgf5c"]
+_data = {
+"intro": SubResource("Animation_vuoi1"),
+"outro": SubResource("Animation_ehxo8")
+}
+
+[sub_resource type="Animation" id="Animation_7t2g7"]
+resource_name = "intro"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("music_table:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-40.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_wews2"]
+resource_name = "outro"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("music_table:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, -40.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dfk4e"]
+_data = {
+"intro": SubResource("Animation_7t2g7"),
+"outro": SubResource("Animation_wews2")
+}
+
+[node name="Spaceship" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_5gcmm")
+
+[node name="Map" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="background" type="ColorRect" parent="Map"]
+offset_right = 1664.0
+offset_bottom = 2368.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Cabin" type="Node2D" parent="Map"]
+
+[node name="cabin_frame" type="TextureRect" parent="Map/Cabin"]
+visible = false
+offset_right = 320.0
+offset_bottom = 240.0
+scale = Vector2(4, 4)
+texture = ExtResource("2_xwvt0")
+stretch_mode = 2
+
+[node name="cabin_frame2" type="TextureRect" parent="Map/Cabin"]
+visible = false
+offset_right = 320.0
+offset_bottom = 240.0
+scale = Vector2(4, 4)
+texture = ExtResource("3_ghvkp")
+stretch_mode = 2
+
+[node name="cabin_frame3" type="TextureRect" parent="Map/Cabin"]
+visible = false
+offset_right = 320.0
+offset_bottom = 240.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_lq6p3")
+stretch_mode = 2
+
+[node name="MusicTable" type="StaticBody2D" parent="Map/Cabin" groups=["Interactable"]]
+disable_mode = 1
+
+[node name="TRect" type="TextureRect" parent="Map/Cabin/MusicTable"]
+offset_left = 920.0
+offset_top = 584.0
+offset_right = 940.0
+offset_bottom = 621.0
+scale = Vector2(4, 4)
+texture = ExtResource("3_la8xg")
+stretch_mode = 2
+
+[node name="Collisions" type="CollisionShape2D" parent="Map/Cabin/MusicTable"]
+visible = false
+position = Vector2(958.5, 656)
+shape = SubResource("RectangleShape2D_boq4c")
+
+[node name="InfoTable" type="StaticBody2D" parent="Map/Cabin" groups=["Interactable"]]
+
+[node name="TRect" type="TextureRect" parent="Map/Cabin/InfoTable"]
+offset_left = 280.0
+offset_top = 584.0
+offset_right = 302.0
+offset_bottom = 621.0
+scale = Vector2(4, 4)
+texture = ExtResource("2_68yql")
+stretch_mode = 2
+
+[node name="Collisions" type="CollisionShape2D" parent="Map/Cabin/InfoTable"]
+visible = false
+position = Vector2(329.5, 655.25)
+shape = SubResource("RectangleShape2D_6fu60")
+
+[node name="LandingTable" type="StaticBody2D" parent="Map/Cabin" groups=["Interactable"]]
+
+[node name="TRect" type="TextureRect" parent="Map/Cabin/LandingTable"]
+offset_left = 568.0
+offset_top = 408.0
+offset_right = 604.0
+offset_bottom = 428.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_vmcqi")
+stretch_mode = 2
+
+[node name="Collisions" type="CollisionShape2D" parent="Map/Cabin/LandingTable"]
+visible = false
+position = Vector2(640, 452)
+shape = SubResource("RectangleShape2D_4h4tx")
+
+[node name="Radio" type="StaticBody2D" parent="Map/Cabin" groups=["Interactable"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Cabin/Radio"]
+position = Vector2(800, 788)
+shape = SubResource("RectangleShape2D_4i5rq")
+
+[node name="TRect" type="TextureRect" parent="Map/Cabin/Radio"]
+z_index = 1
+offset_left = 760.0
+offset_top = 772.0
+offset_right = 780.0
+offset_bottom = 779.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_q826g")
+stretch_mode = 2
+
+[node name="Corridor" type="Node2D" parent="Map"]
+
+[node name="corridor_frame" type="TextureRect" parent="Map/Corridor"]
+offset_top = 960.0
+offset_right = 341.0
+offset_bottom = 1261.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_jyj1c")
+stretch_mode = 6
+
+[node name="Doors" type="StaticBody2D" parent="Map/Corridor" groups=["Interactable"]]
+
+[node name="TRect" type="TextureRect" parent="Map/Corridor/Doors"]
+offset_left = 544.0
+offset_top = 2160.0
+offset_right = 592.0
+offset_bottom = 2164.0
+scale = Vector2(4, 4)
+texture = ExtResource("7_jsm77")
+stretch_mode = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Corridor/Doors"]
+visible = false
+position = Vector2(640, 2168)
+shape = SubResource("RectangleShape2D_mvumo")
+
+[node name="FreezeRoom" type="Node2D" parent="Map"]
+y_sort_enabled = true
+
+[node name="freeze_room" type="TextureRect" parent="Map/FreezeRoom"]
+offset_left = 572.0
+offset_top = 1028.0
+offset_right = 936.0
+offset_bottom = 1275.0
+scale = Vector2(4, 4)
+texture = ExtResource("4_wu07t")
+expand_mode = 1
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Freezer" type="StaticBody2D" parent="Map/FreezeRoom" groups=["Interactable"]]
+y_sort_enabled = true
+position = Vector2(-16, 55)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/FreezeRoom/Freezer"]
+position = Vector2(1371.5, 1582)
+shape = SubResource("RectangleShape2D_4vmtc")
+
+[node name="body" type="Node2D" parent="Map/FreezeRoom/Freezer"]
+position = Vector2(1371, 1585)
+scale = Vector2(1.5, 1.5)
+
+[node name="freezer" type="TextureRect" parent="Map/FreezeRoom/Freezer/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -38.0
+offset_top = -152.0
+offset_right = -19.0
+offset_bottom = -114.0
+scale = Vector2(4, 4)
+texture = ExtResource("8_x64xg")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="glass" type="ColorRect" parent="Map/FreezeRoom/Freezer/body"]
+z_index = 1
+y_sort_enabled = true
+offset_left = -14.0
+offset_top = -112.0
+offset_right = 14.0
+offset_bottom = -36.0
+color = Color(0, 1, 1, 0.462745)
+
+[node name="FreezingTable" type="StaticBody2D" parent="Map/FreezeRoom" groups=["Interactable"]]
+
+[node name="freezed" type="TextureRect" parent="Map/FreezeRoom/FreezingTable"]
+z_index = 1
+offset_left = 1020.0
+offset_top = 1302.0
+offset_right = 1056.0
+offset_bottom = 1322.0
+scale = Vector2(4, 4)
+texture = ExtResource("9_sbqvs")
+stretch_mode = 2
+
+[node name="unfreeezed" type="TextureRect" parent="Map/FreezeRoom/FreezingTable"]
+visible = false
+z_index = 1
+offset_left = 1020.0
+offset_top = 1302.0
+offset_right = 1056.0
+offset_bottom = 1322.0
+scale = Vector2(4, 4)
+texture = ExtResource("10_4haa5")
+stretch_mode = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/FreezeRoom/FreezingTable"]
+z_index = 1
+position = Vector2(1091.75, 1346)
+shape = SubResource("RectangleShape2D_e6b17")
+
+[node name="map_collisions" type="StaticBody2D" parent="Map"]
+visible = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/map_collisions"]
+build_mode = 1
+polygon = PackedVector2Array(240, 800, 240, 560, 480, 320, 800, 320, 1040, 560, 1040, 800, 728, 800, 720, 808, 720, 1440, 952, 1440, 960, 1432, 960, 1280, 1440, 1280, 1440, 1760, 960, 1760, 960, 1608, 952, 1600, 720, 1600, 720, 2168, 560, 2168, 560, 808, 552, 800)
+
+[node name="Player" parent="Map" instance=ExtResource("3_iwq7o")]
+position = Vector2(1244, 1565)
+
+[node name="Ui" parent="." instance=ExtResource("9_wm8rs")]
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_wh0xf")
+}
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="AnimationPlayer"]
+z_index = 2
+position = Vector2(1354, 1513)
+emitting = false
+amount = 120
+process_material = SubResource("ParticleProcessMaterial_sjrce")
+texture = ExtResource("14_wl204")
+randomness = 1.0
+
+[node name="Canvas" type="CanvasLayer" parent="AnimationPlayer"]
+
+[node name="awaking" type="Node2D" parent="AnimationPlayer/Canvas"]
+position = Vector2(-372, -1085)
+
+[node name="intro" type="ColorRect" parent="AnimationPlayer/Canvas/awaking"]
+visible = false
+z_index = 4
+offset_left = 384.0
+offset_top = 1080.0
+offset_right = 1664.0
+offset_bottom = 2048.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="AnimationPlayer/Canvas/awaking/intro"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.009375
+anchor_top = 0.00516529
+anchor_right = 0.990625
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Obudź się
+Obudź się
+Obudź się
+Obudź się
+Obudź się"
+label_settings = SubResource("LabelSettings_p1oig")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="outro" type="ColorRect" parent="AnimationPlayer/Canvas/awaking"]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+top_level = true
+z_index = 5
+offset_right = 1280.0
+offset_bottom = 968.0
+
+[node name="freezing" type="Node2D" parent="AnimationPlayer/Canvas"]
+
+[node name="ColorRect" type="ColorRect" parent="AnimationPlayer/Canvas/freezing"]
+visible = false
+self_modulate = Color(0, 0, 0, 0)
+offset_right = 1280.0
+offset_bottom = 960.0
+metadata/_edit_use_anchors_ = true
+
+[node name="background" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_vej5g")
+volume_db = -40.0
+pitch_scale = 0.2
+
+[node name="music_trans" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_pgf5c")
+}
+
+[node name="music_table" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("21_cdvlr")
+volume_db = -40.0
+
+[node name="music_table_trans" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_dfk4e")
+}
+
+[node name="lightspeedsound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("21_8emqr")
+volume_db = 6.0
+pitch_scale = 0.5
+
+[connection signal="ready" from="." to="." method="_on_ready"]
